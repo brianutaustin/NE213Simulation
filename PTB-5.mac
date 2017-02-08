@@ -1,0 +1,78 @@
+###########################
+# Macro file for simNE213 #
+###########################
+# 
+#	
+#
+# Return to default values :
+/control/execute Defaults.mac
+#
+#
+# Set source position 
+/beam/position/Zposition -1000.
+#
+#
+# Set source volume distribution
+/beam/position/radius 25.4
+/beam/position/distribution Disc
+#
+#
+# Set direction
+#/beam/direction ConeBeam
+#/beam/direction/angle 0.030
+#
+#
+# Set PTB energy distribution : 
+# gaussian distribution with meanKineticEnergy = 5.0 MeV and sigmaKineticEnergy = 50 keV
+/beam/energy/distribution gaussian
+/beam/energy/meanEnergy 5.0
+/beam/energy/sigmaEnergy 0.050
+#
+#
+# Set light grid
+/grid/minLightGrid 0.0
+/grid/maxLightGrid 3.0
+/grid/channelNbLightGrid 300
+#
+#
+# Run
+/run/beamOn 1000
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

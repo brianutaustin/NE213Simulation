@@ -1,0 +1,75 @@
+###########################
+# Macro file for simNE213 #
+###########################
+# 
+#	Disc Neutron Source of 14 MeV (+/- 0.5 MeV)
+#
+#
+# Visualisation
+#/vis/viewer/refresh
+#
+#
+# Return to default values :
+#/control/execute Defaults.mac
+#
+#
+# Set source position 
+/beam/position/Zposition -1000.
+#
+#
+# Set source volume distribution
+/beam/position/radius 25.4
+/beam/position/distribution Disc
+#
+#
+#
+# Set energy distribution : 
+/beam/energy/distribution gaussian
+/beam/energy/meanEnergy 14.0
+/beam/energy/sigmaEnergy 0.5
+#
+#
+# Run
+/run/beamOn 1000
+#
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

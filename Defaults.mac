@@ -1,0 +1,39 @@
+###########################
+# Macro file for simNE213 #
+###########################
+#
+#	Restoring default parameters :
+# Neutron beam located in (0,0,-2.0), toward (0,0,1)
+# with an energy of 14 MeV and zero standard deviation
+#
+#
+#
+/beam/position/Xposition 0.
+/beam/position/Yposition 0.
+/beam/position/Zposition -2. m
+#
+/beam/direction default
+/beam/direction/angle 0.087
+#
+/beam/energy/meanEnergy 14.0
+/beam/energy/sigmaEnergy 0.0
+/beam/energy/distribution default
+#
+#
+# Default grid : from 0 to 20 MeeVe with 1000 channels
+/grid/minLightGrid 0.0
+/grid/maxLightGrid 20.0
+/grid/channelNbLightGrid 1000
+#
+#
+# Stepping parameters
+/stepping/calculation true
+/stepping/spectrum true
+/stepping/print false
+#
+#
+#
+#
+###################################
+#  All parameters reset ---> end  #
+###################################

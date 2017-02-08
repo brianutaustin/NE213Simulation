@@ -1,0 +1,45 @@
+/run/verbose 2
+/control/execute vis.mac
+/vis/open OGL 600x600-0+0
+/vis/sceneHandler/create OGL
+/vis/viewer/create ! ! 600x600-0+0
+/vis/viewer/refresh
+/vis/viewer/set/autoRefresh false
+/vis/verbose errors
+/vis/drawVolume
+/vis/scene/create
+/vis/scene/add/volume world
+/vis/sceneHandler/attach
+/vis/viewer/set/viewpointThetaPhi 45. 45.
+/vis/viewer/zoom 80.
+/vis/viewer/set/auxiliaryEdge true
+/vis/scene/add/axes 0 0 0 1 m
+/vis/scene/notifyHandlers
+/vis/scene/add/trajectories smooth
+/tracking/storeTrajectory 2
+/vis/scene/notifyHandlers
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/scene/notifyHandlers scene-0
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 1
+/vis/scene/notifyHandlers scene-0
+/vis/scene/endOfEventAction accumulate
+/vis/viewer/set/autoRefresh true
+/vis/viewer/refresh
+/vis/verbose warnings
+/run/beamOn 100
+/vis/scene/notifyHandlers scene-0
+/run/particle/addProcManager Si28[0.0]
+/run/particle/addProcManager C12[0.0]
+/run/particle/addProcManager Al27[0.0]
+/run/particle/addProcManager O16[0.0]
+/run/particle/addProcManager N14[0.0]
+/run/beamOn 100
+/run/particle/addProcManager C13[0.0]
+/run/beamOn 100
+/run/particle/addProcManager Mg26[0.0]
+/run/particle/addProcManager Be9[0.0]
+/run/particle/addProcManager N16[0.0]
+/run/particle/addProcManager B11[0.0]
+/run/beamOn 100
+/run/particle/addProcManager Mg27[0.0]

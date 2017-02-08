@@ -1,0 +1,79 @@
+###########################
+# Macro file for simNE213 #
+###########################
+#  
+#
+#	Punctual Isotropic Neutron Source of 14 MeV (+/- 0.5 MeV)
+#
+#
+# Visualisation
+#/vis/viewer/refresh
+#
+#
+# Return to default values :
+/control/execute Defaults.mac
+#
+#
+# Set source position (close enough from detector)
+/beam/position/Zposition -50.
+#
+#
+# Set source volume distribution
+/beam/position/radius 1.
+/beam/position/distribution Disc
+#
+#
+# Set isotropic flux
+/beam/direction Isotropic
+#
+#
+# Set energy distribution : 
+/beam/energy/distribution gaussian
+/beam/energy/meanEnergy 14.0
+/beam/energy/sigmaEnergy 0.5
+#
+#
+# Run
+/run/beamOn 1000
+#
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

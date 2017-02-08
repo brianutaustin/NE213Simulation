@@ -1,0 +1,81 @@
+###########################
+# Macro file for simNE213 #
+###########################
+#  
+#
+#	Neutron beam distributed on a Disc with AmBe energy spectrum
+#
+#
+# Visualisation
+#/vis/viewer/refresh
+#
+#
+# Return to default values :
+/control/execute Defaults.mac
+#
+#
+# Set source position 
+/beam/position/Zposition -1000.
+#
+#
+# Set source volume distribution
+/beam/position/radius 25.4
+/beam/position/distribution Disc
+#
+#
+#
+# Set Light Grid
+/grid/minLightGrid 0.0
+/grid/maxLightGrid 6.0
+/grid/channelNbLightGrid 300
+#
+#
+#
+# Set energy distribution : 
+/beam/energy/distribution AmBe
+#
+#
+# Run
+/run/beamOn 1000
+#
+#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

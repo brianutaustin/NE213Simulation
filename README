@@ -1,0 +1,114 @@
+Simulation d'un scintillateur NE213 avec Geant4.
+Programme construit a partir de l'exemple /Basic/B1 fournit dans Geant4.
+
+Version 0.14
+
+Date : 20/12/2012
+
+- Fichier de base : exemple B1 fourni dans Geant4
+
+- Modification du "main()" : la définition de la physique a été modifiée pour inclure un module de scintillation optique en plus du module QGSP_BIC_HP qui gère les neutrons (<20MeV). La partie visualisation peut être neutralisée par sa mise en commentaire pour accélérer la vitesse d'exécution du programme.
+
+- Modification de la géométrie : scintillateur NE213 sous la forme d'un cylindre entouré d'une coque en aluminium de 2mm d'épaisseur, collé à un tube photopultiplicateur lui aussi en aluminium. Les deux sont en contact avec une vitre (SiO2). Les modules de propriétés optiques du scintillateur mais avec les valeurs issues d'un exemple sur du xénon liquide. Pour neutraliser la scintillation, il convient de mettre la valeur "SCINTILLATIONYIELD" à 0.0/MeV.
+
+- Modification de "PrimaryGeneratorAction" : le "Gun" de base qui tirait des neutrons unidirectionnels et monoénergétiques a été complété par différents modules permettant de modifier son emplacement, sa direction et son énergie de tir par des fonctions de distributions plus complexes (gaussiennes ou de sources polycinétiques : AmBe, PuC et Cf252). S'ajoute à cette classe un "PrimaryGeneratorMessenger" qui permet de modifier les options pendant l'exécution du programme.
+
+- La classe "SteppingAction" a été complétée pour suivre différents événements (chocs élastiques, réactions nucléaires, etc.), et ces informations sont remontées à la classe "EventAction" puis "RunAction". Elle contient en outre un module d'affichage et qui fait apparaître l'évolution de certaines variables en pas à pas (malheureusement sans remise à zéro tant que le "main()" est en cours d'exécution).Le "SteppingMessenger" permet d'activer ou de désactiver certains paramètres pendant l'exécution du fichier de simulation, dont le module d'affichage. Les fonctions de transformations lumières intègrent la résolution, définie d'après la thèse de François Begin (ce n'est pas le cas des réponses obtenues par le module de scintillation de Geant4)
+
+- La classe "EventAction" sert de lien entre "SteppingAction" et "RunAction", et édite les réponses lumières (ou autres spectres).
+
+- La classe "RunAction" compile les informations remontées depuis "SteppingAction" et dispose d'une séquence d'affichage en fin d'exécution pour faire le bilan statistique d'un certain nombre de paramètres. La classe "RunMessenger" permet de modifier les paramètres d'édition des spectres lumières sous "Idle".
+
+- Liste des différentes commandes (hors visualisation) sous "Idle" :
+
+	- /beam/position/Xposition 2.0 cm 		// définir l'abscisse de référence de la source (unité par défaut : mm)
+	- /beam/position/Yposition 2.0 cm 		// définir l'ordonée de référence de la source (unité par défaut : mm)
+	- /beam/position/Zposition 2.0 cm 		// définir la cote de référence de la source (unité par défaut : mm)
+
+	- /beam/position/distribution String 		// définir la distribution spatiale de la source (choix : Point, Circle, Disc, GaussianDisc)
+
+	- /beam/position/radius 2.0 cm			// définir le rayon associé aux distribution spatiales (unité par défaut : mm)
+
+	- /beam/direction String			// définir la direction de la source (choix : default, Isotropic, ConeBeam)
+
+	- /beam/energy/distribution String		// définir la distribution de l'énergie (choix : default, gaussian, AmBe, PuC, Cf252)
+	- /beam/energy/meanEnergy 14.0 MeV		// définir l'énergie moyenne de la particule (unité par défaut : MeV)
+	- /beam/energy/sigmaEnergy 0.5 MeV		// définir l'écart type de la distribution de l'énergie (unité par défaut : MeV)
+
+	- /grid/minLightGrid				// définir en MeeVe la valeur minimale des spectres édités (unité unique : MeeVe)
+	- /grid/maxLightGrid				// définir en MeeVe la valeur maximale des spectres édités (unité unique : MeeVe)
+	- /grid/channelNbLightGrid			// définir le nombre de canaux des spectres (entier naturel)
+
+	- /stepping/print				// Active (true) ou désactive (false) la séquence d'affichage liée à "SteppingAction"
+	- /stepping/calculation				// Active (true) ou désactive (false) les fonctions de calcul dans "SteppingAction"
+	- /stepping/spectrum				// Active (true) ou désactive (false) le calcul de la réponse lumière (fichier spectre)
+
+- Fonctions des différentes macros (/control/execute fichier.mac)
+
+	- Defaults.mac : restore les valeurs par défaut (source ponctuelle en (0;0;-2), monodirectionelle selon (0;0;1), monocinétique de 14 MeV, la grille est définie de 0 à 20 MeeVe en 1000 canaux, calculs et réponse lumière activés mais séquence d'affichage désactivée)
+
+	- PTB-X.mac : Flux monodirectionnel de neutrons de X MeV avec l'écart type fourni par la documentation du PTB en répartition gaussienne. Tir par défaut de 1000 neutrons. Les grilles lumières sont adaptées aux valeurs de l'énergie.
+
+	- Iso.mac : Flux isotrope de neutrons de 14 MeV (+/- 0.5) répartis uniformément sur un disque de 1 mm de rayon à 5 cm du centre du scintillateur. Tir par défaut de 1000 neutrons. Les grilles lumières sont adaptées aux valeurs de l'énergie.
+
+	- Base.mac : Source monodirectionnelle de neutron de 14 MeV (+/- 0.5) répartis uniformément sur un disque dont le rayon est égal à celui du scintillateur. Tir par défaut de 1000 neutrons.
+
+	- AmBe.mac, PuC.mac et Cf252.mac : Idem que Base.mac mais avec la distribution en énergie de la source mentionnée dans le nom de la macro.
+
+===============================================================================================================================================================
+
+NE213 scintillator simulation under Geant4.
+Built from example /Basic/B1 given with Geant4
+
+Version 0.14
+20/11/2012
+
+- Base file : example B1 available with Geant4
+
+- Changes in "main()" : the physics list has been changed in order to contain a scintillation module in addition to QGSP_BIC_HP handling neutrons (<20MeV). The visualisation can be neutralised in order to fasten the simulation.
+
+- Changes in geometry : the NE213 scintillator is a cylinder surrounded by a 2mm thick aluminium contained, and a photomultiplier tube in aluminium is put at the back. The two are in contact with a glass (SiO2). Modules with optical properties have been added but their values are taken from the example liquid xenon. If scintillation is to be neutralised, the "SCINTILLATIONYIELD" must be set to zero.
+
+- Changes in "PrimaryGeneratorAction" : the basic "Gun" which were only able to shoot monoenergetic neutrons in one direction has received different modules allowing to change position, direction and energy by more sophisticated distributions functions (gaussian or AmBe, PuC and Cf252 neutron sources). The class "PrimaryGeneratorMessenger" allows to change the configuration under "Idle".
+
+- The "SteppingAction" class was modified in order to follow and collect some particular events (elastic scattering, some nuclear reactions, etc.). These informations are then transmitted to "EventAction" and "RunAction". It also contains a printing module which allows to see the evolution of some variables step by step. The "SteppingMessenger" allows to activate or deactivate some options during the execution, inluding the printing sequence. The light responses include resolution, defined as in François Begin's thesis (this is not the case for the spectra obtained with the Geant4 scintillation module).
+
+- The "EventAction" class is the link between the classes "SteppingAction" and "RunAction", and is involved in light responses edition.
+
+- The "RunAction" class stores the data coming from "SteppingAction" through "EventAction" and has a printing sequence at the end of run to show the run statistics. The "RunMessenger" class allow to change spectrum edition parameters under "Idle".
+
+- List of available commands (else than visualisation) under "Idle" :
+
+	- /beam/position/Xposition 2.0 cm 		// define x coordinate of the source (default unit : mm)
+	- /beam/position/Yposition 2.0 cm 		// define y coordinate of the source (default unit : mm)
+	- /beam/position/Zposition 2.0 cm 		// define z coordinate of the source (default unit : mm)
+
+	- /beam/position/distribution String 		// define source spatial distribution (choice : Point, Circle, Disc, GaussianDisc) 
+
+	- /beam/position/radius 2.0 cm			// define the radius associated to some of the spatial distributions (default unit : mm)
+
+	- /beam/direction String			// define source direction (choice : default, Isotropic, ConeBeam)
+
+	- /beam/energy/distribution String		// define energy distribution (choice : default, gaussian, AmBe, PuC, Cf252)
+	- /beam/energy/meanEnergy 14.0 MeV		// define mean kinetic energy (default unit : MeV)
+	- /beam/energy/sigmaEnergy 0.5 MeV		// define energy standard deviation (default unit : MeV)
+
+	- /grid/minLightGrid				// define in MeeVe the lowest energy value of the edited spectra (only unit : MeeVe)
+	- /grid/maxLightGrid				// define in MeeVe the highest energy value of the edited spectra (only unit : MeeVe)
+	- /grid/channelNbLightGrid			// define number of channels (positive integer)
+
+	- /stepping/print				// Activate (true) or deactivate (false) the printing sequence related to "SteppingAction"
+	- /stepping/calculation				// Activate (true) or deactivate (false) the calculations in "SteppingAction"
+	- /stepping/spectrum				// Activate (true) or deactivate (false) the spectrum edition
+
+- List of macros files (/control/execute file.mac) :
+
+	- Defaults.mac : reset all values to default (point source in (0;0;-2), direction (0;0;1), monoenergetic 14MeV, and light grid from 0 to 20 MeeVe in 1000 channels.
+
+	- PTB-X.mac : Gaussian energy distribution with mean energy of 5 MeV and standard deviation provided by the PTB documentation, on direction (0;0;1). The light grids are adapted to each energy value. Default number of primary neutrons : 1000.
+
+	- Iso.mac : Isotropic flux of 14 MeV neutrons (+/- 0.5) uniformly distributed on a disc with 1 mm radius and 5 cm away from the scintillator centre. Default number of primary neutrons : 1000.
+
+	- Base.mac : Unidirectionnal neutron source of 14 MeV (+/- 0.5) uniformly distributed on a Disc whise radius is equal to that of the scintillator. Default number of primary neutrons : 1000.
+
+	- AmBe.mac, PuC.mac et Cf252.mac : Same as Base.mac except that the energy distributions are those of the sources mentionned in the macro's name.
