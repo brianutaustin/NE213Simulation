@@ -133,7 +133,7 @@ simNE213SteppingAction::~simNE213SteppingAction()
   // Comptabilité - Interactions
 
   G4int nPrimaryNeutrons = 0;			// Nombre de neutrons entrant dans le détecteur
-  G4double nNoEvent = 0;			// Nombre de neutrons sans interactions dans le scintillateur
+  G4double nNoEvent = 0;			// Nombre de neutrons sans (without) interactions dans (into) le scintillateur
 
   G4double nEvent_nc = 0;			// Nombre d'interactions n-C
   G4double nEvent_np = 0;			// Nombre d'interactions n-p
@@ -141,18 +141,18 @@ simNE213SteppingAction::~simNE213SteppingAction()
   G4double nEvent_Be8 = 0;
   G4double nEvent_B12 = 0;
 
-  G4double nProton_out = 0;			// Nombre de protons sortant du détecteur
+  G4double nProton_out = 0;			// Nombre de protons sortant (going-out) du détecteur
   G4double nCarbon_out = 0;			// Nombre de carbones sortant du détecteur
 
-  // Mémorisations temporaires
-  G4ThreeVector firstInteractionPosition;	// Vecteur pour mémorisation du premier PostStepPoint du neutron primaire
-  G4ThreeVector secondaryPosition;		// Vecteur pour mémorisation des PreStepPoint des particules secondaires
-  G4ThreeVector firstDisplacement;		// Trajectoire d'entrée du neutron primaire
-  G4ThreeVector lastDisplacement;		// Trajectoire de sortie du neutron primaire
+  // Mémorisations temporaires (Temporarily Memory)
+  G4ThreeVector firstInteractionPosition;	// Vecteur pour (for) mémorisation (memorizing) du premier (first) PostStepPoint du neutron primaire (primary)
+  G4ThreeVector secondaryPosition;		// Vecteur pour mémorisation des (of) PreStepPoint des particules secondaires
+  G4ThreeVector firstDisplacement;		// Trajectoire d'entrée (going-in/entering) du neutron primaire
+  G4ThreeVector lastDisplacement;		// Trajectoire de sortie (going-out) du (of) neutron primaire
 
-  G4int alphaID1(0);				// Stockage de l'ID du premier alpha
-  G4int alphaID2(0);				// Stockage de l'ID du deuxième alpha
-  G4int alpha_tmp(0);				// Nombre d'alphas rencontrés lors d'un cycle
+  G4int alphaID1(0);				// Stockage (Stack) de (of) (the) l'ID du premier alpha
+  G4int alphaID2(0);				// Stockage de l'ID du deuxième (the second) alpha
+  G4int alpha_tmp(0);				// Nombre d'alphas rencontrés (to meet/get again) lors (after) d'un (one) cycle
 
   G4int gammaID(0);
 

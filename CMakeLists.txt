@@ -44,7 +44,8 @@ target_link_libraries(simNE213 ${Geant4_LIBRARIES})
 set(simNE213_SCRIPTS
 AmBe.mac	Defaults.mac	PTB-14.8.mac	PuC.mac		vis.mac
 Base.mac	Iso.mac		PTB-2.mac	init.mac
-Cf252.mac	PTB-1.mac	PTB-5.mac	init_vis.mac
+Cf252.mac	PTB-1.mac	PTB-5.mac	init_vis.mac dungRun.mac
+Draw.C DrawBoth.C
   )
 
 foreach(_script ${simNE213_SCRIPTS})

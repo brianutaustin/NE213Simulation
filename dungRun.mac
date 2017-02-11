@@ -25,14 +25,14 @@
 # Set PTB energy distribution :
 # gaussian distribution with meanKineticEnergy = 0.997 MeV and sigmaKineticEnergy = 29.7 keV (4sigma)
 /beam/energy/distribution gaussian
-/beam/energy/meanEnergy 0.997
-/beam/energy/sigmaEnergy 0.00297
+/beam/energy/meanEnergy 8.9
+/beam/energy/sigmaEnergy 0.7
 #
 #
 # Set light grid
 /grid/minLightGrid 0.0
-/grid/maxLightGrid 0.5
-/grid/channelNbLightGrid 250
+/grid/maxLightGrid 6
+/grid/channelNbLightGrid 200
 #
 #
 # Run
